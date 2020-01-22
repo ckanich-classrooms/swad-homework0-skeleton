@@ -1,0 +1,17 @@
+{
+  "name": "homework0",
+  "version": "1.0.0",
+  "description": "FizzBuzz in node.js",
+  "author": "First Last <first.last@example.com>",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "grade": "mocha -R json; exit 0",
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-mocha": "^6.2.2",
+    "mocha": "^7.0.0"
+  }
+}
