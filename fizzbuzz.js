@@ -1,6 +1,6 @@
-const express = require('express')
-const app = express()
-const port = 8080
+const express = require('express');
+const app = express();
+const port = 8080;
 
 function fizzBuzzOutput(value){
     // TODO: Write fizzbuzz
@@ -8,12 +8,12 @@ function fizzBuzzOutput(value){
 }
 
 app.get('/fizzbuzz/:n', (req, res) => {
-    // TODO: Write express route
+    // TODO: Extract n from the parameters and send
+    // the fizzbuzz output to the client.
 
-    // * Send response
-    res.send("")
+    res.send("");
 })
 
-module.exports.app = app
-module.exports.port = port
+module.exports.app = app;
+module.exports.port = port;
 module.exports.fizzBuzzOutput = fizzBuzzOutput;
