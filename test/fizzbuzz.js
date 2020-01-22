@@ -2,7 +2,8 @@ var fizzBuzzOutput = require( "../fizzbuzz" ).fizzBuzzOutput;
 
 const assert = require( 'assert' );
 const axios = require( 'axios' )
-
+const port = require( '../fizzbuzz' ).port
+const app = require( '../fizzbuzz' ).app
 
 describe( "fizzbuzz", function () {
     it( "Should output Fizz for numbers %3=0 && %5!=0", function () {
@@ -20,17 +21,13 @@ describe( "fizzbuzz", function () {
 
 } );
 
-const port = require( '../fizzbuzz' ).port
-const app = require( '../fizzbuzz' ).app
 describe( "fizzbuzz api test", async () => {
     // * Arrow functions are better^^^ B)
 
-    // ! Cleanup code
+    // ! Cleanup code (starts and closes server)
     let server = {}
     before( async () => {
-        server = app.listen( port, () => {
-            //console.log(`FizzBuzz listening on port ${port}`)
-        } )
+        server = app.listen( port )
     } )
 
     after( async () => {
@@ -40,11 +37,14 @@ describe( "fizzbuzz api test", async () => {
     // * FizzBuzz API Req helper
     let getFizz = ( n ) => {
         return new Promise( async ( resolve, reject ) => {
-            const { data } = await ( axios.get( `http://localhost:${port}/fizzbuzz/${n}` ).catch( err => { } ) )
+            const { data } = await ( axios.get( `http://localhost:${port}/fizzbuzz/${n}` ).catch( err => {
+                console.log("FIZZBUZZ: There was an error making the request...")
+             } ) )
             resolve( data.toString() )
         } )
     }
 
+    // * Test Case Assertions
     it( "Should output Fizz for numbers %3=0 && %5!=0", async () => {
         assert.strictEqual( ( await getFizz( 6 ) ), "Fizz" );
     } );
@@ -57,4 +57,5 @@ describe( "fizzbuzz api test", async () => {
     it( "Should output the number if divisible by neither 3 nor 5", async () => {
         assert.strictEqual( ( await getFizz( 98 ) ), "98" );
     } );
+
 } )
