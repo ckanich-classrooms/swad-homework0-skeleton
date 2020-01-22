@@ -9,6 +9,7 @@ function fizzBuzzOutput(value){
 
 app.get('/fizzbuzz/:n', (req, res) => {
     // TODO: Write express route
+    res.send("")
 })
 
 module.exports.app = app
